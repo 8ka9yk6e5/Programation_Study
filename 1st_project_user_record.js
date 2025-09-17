@@ -1,16 +1,10 @@
 //variables
+//this form it's better, if it's knowledge the start values
 
-let name;
-let age;
-let height;
-let isStudying;
-
-//Entering the informations
-
-name = "Kayke K. Krevellin";
-age = 16;
-height = 1.70;
-isStudying = true;
+let name = "Kayke K. Krevellin";
+let age = 16;
+let height = 1.70;
+let isStudying = true;
 
 //showing the variables in a table
 
