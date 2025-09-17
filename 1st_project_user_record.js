@@ -17,5 +17,5 @@ console.log(`Value type: ${typeof age}\n`);
 console.log(`Height: ${height}`);
 console.log(`Value type: ${typeof height}\n`);
 
-console.log(`User studying yet: ${isStudying}`);
+console.log(`Is the user studying? ${isStudying}`);
 console.log(`Value type: ${typeof isStudying}\n`);
