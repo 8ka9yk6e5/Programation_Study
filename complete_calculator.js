@@ -8,7 +8,7 @@ function percent(a, b){return (a * b)}//b is the percentage
 function root(a,b){return a ** (1/b)}//b defines which root is
 function round(num){return Number(num.toFixed(2))}
 
-function calculationTransfer(num1 = 0, num2 = 0, type = null){
+function calculationTransfer(num1 = 0, num2 = 0, type){
     let result = type(num1, num2);
     result = needToRound(result);
     return result;
@@ -16,14 +16,14 @@ function calculationTransfer(num1 = 0, num2 = 0, type = null){
 
 let needToRound = function(num){
     if (String(num).includes('.')) return round(num);
-    return num
+    return num;
 }
 
 let definedNum1, definedNum2;
 let result, calculationType;
 
-definedNum1 = 10
-definedNum2 = 2
+definedNum1 = 10;
+definedNum2 = 2;
 calculationType = sum;
 calculationTypeString = "sum";
 
