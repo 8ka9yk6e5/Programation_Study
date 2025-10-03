@@ -2,7 +2,7 @@ function sum(a, b){return a + b}
 function subtraction(a,b){return a - b}
 function multiplication(a,b){return a * b}
 function division(a,b){return a / b}
-function potency(a,b){return a ** b}
+function pow(a,b){return a ** b}
 function remaining(a,b){return a % b}
 function percent(a, b){return (a * b)}//b is the percentage
 function root(a,b){return a ** (1/b)}//b defines which root is
