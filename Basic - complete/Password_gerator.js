@@ -1,7 +1,5 @@
 const readline = require('node:readline');
 
-let digits = 12;
-
 let numberOrLetter = () => Boolean(Math.floor(Math.random()*2));
 /*
 to have more chace to get 1 or 0
