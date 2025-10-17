@@ -72,10 +72,13 @@ const gettingInfo = {//methods to get important values from user
         rl.question("What is time type which you want to maintain the investment:\n1-For a time\n2-until the end of investment\n", (userEnter) =>{
             switch(userEnter){
                 case 1:
+                    timeOfInvestment.timeToPass();
                     break;
                 case 2:
+                    timeOfInvestment.endOfTheInvestment();
                     break;
                 default:
+                    console.log("ERROR - Invalid argument");
                     break;
             }
         })
