@@ -56,7 +56,7 @@ const gettingInfo = {//methods to get important values from user
             output : process.stdout
         })
 
-        rl.question("Enter the medium of tax in period(of investment):\n", (userEnter) => {
+        rl.question("Enter the medium of tax in period(of investment, in months):\n", (userEnter) => {
             if (!isNaN(Number(userEnter)) && userEnter > 0){
                 investmentInformation.taxInPeriod(userEnter/100);//update to a percentage the current tax
                 rl.close();
@@ -72,7 +72,7 @@ const gettingInfo = {//methods to get important values from user
         rl.question("What is time type which you want to maintain the investment:\n1-For a time\n2-until the end of investment\n", (userEnter) =>{
             switch(userEnter){
                 case 1:
-                    timeOfInvestment.timeToPass();
+                    timeOfInvestment.enterTheTimeWhichBeMaintained();
                     break;
                 case 2:
                     timeOfInvestment.endOfTheInvestment();
@@ -86,11 +86,33 @@ const gettingInfo = {//methods to get important values from user
 }
 
 const timeOfInvestment = {
-    timeToPass() {//time which the investment be active
-
+    enterTheTimeWhichBeMaintained() {
+      const rl = readline.interface({
+          input : process.stdin,
+          output :process.stdout
+      })
     },
 
     endOfTheInvestment(){//to get the date which the investment end
+        const rl = readline.Interface({
+            input : process.stdin,
+            output : process.stdout
+        })
 
+        rl.question("DD-MM-YYYY\nEnter the end date of the investment:\n",(userEnter)=> {
+            const date = new Date(userEnter);
+            if(!isNaN(date.getTime())){
+                const endInvestmentDate = {
+                    day: userEnter.substr(0, 2),
+                    month: userEnter.substr(3, 2),
+                    year: userEnter.substr(5, 2),
+                }
+            }
+            rl.close();//add a form to calculate the time
+        })
     }
+}
+
+function controlCode(){
+
 }
