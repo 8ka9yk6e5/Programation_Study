@@ -1,3 +1,1 @@
-let user = {sayHi() {console.log("Hello!");}}
-
-console.log(user);
+console.log(1e-6);
