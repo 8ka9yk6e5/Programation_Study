@@ -4,8 +4,8 @@ const investmentInformation = {//informations important to code
     quantity : undefined,
     taxInPeriod : undefined,
     time : undefined,
-    interest() {return (this.quantity * this.taxInPeriod * this.time)},//used when don't have a acumulated interest, used in short time
-    compoundInterest() {return (this.quantity * (1 + this.taxInPeriod) ** this.time)}//with acumulated interest, used in medium or long time
+    interest() {return (this.quantity + (this.quantity * this.taxInPeriod * this.time))},//used when don't have a acumulated interest, used in short time
+    compoundInterest() {return (this.quantity + (this.quantity * (1 + this.taxInPeriod) ** this.time))}//with acumulated interest, used in medium or long time
 };
 
 const gettingInfo = {//methods to get important values from user
@@ -125,7 +125,7 @@ function controlCode(){
     gettingInfo.quantityEnter();//get quantity
     gettingInfo.gettingTaxInPeriod();//get the tax
     gettingInfo.whichTypeOfTime(); //get the time
-    console.warn(gettingInfo.typeOfInvestment(investmentInformation.compoundInterest, investmentInformation.interest()));//calculate and show to user
+    console.warn(`the returned value will be : ${gettingInfo.typeOfInvestment(investmentInformation.compoundInterest, investmentInformation.interest)}`);//calculate and show to user
 }
 
 controlCode();
