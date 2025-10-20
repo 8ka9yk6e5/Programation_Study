@@ -18,10 +18,12 @@ const gettingInfo = {//methods to get important values from user
             switch (userEnter){
                 case 1:
                 case 2:
-                    callbackCompound();
+                    const compoundResult = callbackCompound();
+                    return compoundResult;
                     break;
                 case 3:
-                    callback();
+                    const result = callback();
+                    return result;
                     break;
                 default:
                     console.log("ERROR - Invalid argument");//give an error if the value don't correspond w ith others
@@ -60,7 +62,7 @@ const gettingInfo = {//methods to get important values from user
     },
 
     whichTypeOfTime(){
-        const rl = readline.interface({
+        const rl = readline.Interface({
             input : process.stdin,
             output : process.stdout
         })
@@ -127,5 +129,5 @@ function controlCode(){
     gettingInfo.whichTypeOfTime(); //get the time
     console.warn(`the returned value will be : ${gettingInfo.typeOfInvestment(investmentInformation.compoundInterest, investmentInformation.interest)}`);//calculate and show to user
 }
-
+//corrigir o bug
 controlCode();
