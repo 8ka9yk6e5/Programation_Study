@@ -8,14 +8,8 @@ const investmentInformation = {//informations important to code
     compoundInterest() {return (this.quantity * (1 + this.taxInPeriod) ** this.time)}//with acumulated interest, used in medium or long time
 };
 
-const date = {//get the current date values
-    day : new Date().getDate(),
-    month : new Date().getMonth(),
-    year : new Date().getFullYear()
-}
-
 const gettingInfo = {//methods to get important values from user
-    typeOfinvestment(callbackCompound, callback) {//to type of them
+    typeOfInvestment(callbackCompound, callback) {//to type of them
         const rl = readline.Interface({
             input : process.stdin,
             output : process.stdout
@@ -30,7 +24,7 @@ const gettingInfo = {//methods to get important values from user
                     callback();
                     break;
                 default:
-                    console.log("ERROR - Invalid argument");
+                    console.log("ERROR - Invalid argument");//give an error if the value don't correspond w ith others
                     break;
             }
         })
@@ -42,11 +36,11 @@ const gettingInfo = {//methods to get important values from user
             input : process.stdin,
             output : process.stdout
         })
-        rl.question("Enter the quantity to Invest:\n", (userEnter) => {
-            if (!Number.isNaN(userEnter) && userEnter > 0) {
-                rl.close();
+        rl.question("Enter the quantity to Invest:\n", (userEnter) => {//to get the quantity
+            if (!Number.isNaN(userEnter) && userEnter > 0) {//see if is a realy a number and is more than 0
                 investmentInformation.quantity = userEnter;//save the quantity
-            } else console.log("ERROR - The enter is too low or isn't a number");
+                rl.close();
+            } else console.log("ERROR - The enter is too low or isn't a number");//show an error
         })
     },
 
@@ -61,6 +55,7 @@ const gettingInfo = {//methods to get important values from user
                 investmentInformation.taxInPeriod(userEnter/100);//update to a percentage the current tax
                 rl.close();
             }
+            else console.log("ERROR - The enter is too low or isn't a number");//error if don't correspond of allowed value
         })
     },
 
@@ -75,10 +70,10 @@ const gettingInfo = {//methods to get important values from user
                     timeOfInvestment.enterTheTimeWhichBeMaintained();
                     break;
                 case 2:
-                    timeOfInvestment.endOfTheInvestment();
+                    timeOfInvestment.calculateDateRemaining(timeOfInvestment.endOfTheInvestment());
                     break;
                 default:
-                    console.log("ERROR - Invalid argument");
+                    console.log("ERROR - Invalid argument");//if are other value which don't is allowed
                     break;
             }
         })
@@ -86,11 +81,19 @@ const gettingInfo = {//methods to get important values from user
 }
 
 const timeOfInvestment = {
-    enterTheTimeWhichBeMaintained() {
-      const rl = readline.interface({
+    enterTheTimeWhichBeMaintained() {//to enter how much months need pass to remove the investment
+        const rl = readline.interface({
           input : process.stdin,
           output :process.stdout
-      })
+        })
+
+        rl.question("How much months the investment will be maintained?\n", (userEnter) => {
+            if (!isNaN(userEnter) && userEnter > 0) {
+                investmentInformation.time = userEnter;
+            }
+            else console.log("ERROR - The enter is too low or isn't a number");//error if doesn't correspond
+            rl.close();
+        })
     },
 
     endOfTheInvestment(){//to get the date which the investment end
@@ -99,20 +102,30 @@ const timeOfInvestment = {
             output : process.stdout
         })
 
-        rl.question("DD-MM-YYYY\nEnter the end date of the investment:\n",(userEnter)=> {
+        rl.question("MM-DD-YYYY\nEnter the end date of the investment:\n",(userEnter)=> {
             const date = new Date(userEnter);
             if(!isNaN(date.getTime())){
-                const endInvestmentDate = {
-                    day: userEnter.substr(0, 2),
-                    month: userEnter.substr(3, 2),
-                    year: userEnter.substr(5, 2),
-                }
+                return date;
             }
-            rl.close();//add a form to calculate the time
+            else console.log("ERROR - this is'nt correspond with a date");//error if the userEnter doesn't correspond to a date
+            rl.close();
         })
+    },
+
+    calculateDateRemaining(callback) {
+        const investmentEndDate = callback();//call the function to user enter that value
+
+        const timeRemaining = Math.Ceil((investmentEndDate - new Date()) / ((1000 * 60 * 60 * 24) * 30.44)); //transform the user enter of end date to how much months will pass
+
+        investmentInformation.time = timeRemaining;//pass to main object
     }
 }
 
 function controlCode(){
-
+    gettingInfo.quantityEnter();//get quantity
+    gettingInfo.gettingTaxInPeriod();//get the tax
+    gettingInfo.whichTypeOfTime(); //get the time
+    console.warn(gettingInfo.typeOfInvestment(investmentInformation.compoundInterest, investmentInformation.interest()));//calculate and show to user
 }
+
+controlCode();
