@@ -1,4 +1,4 @@
-const readline = require('node:readline');//import the readline
+const readline = require('readline');//import the readline
 
 const investmentInformation = {//informations important to code
     quantity : undefined,
