@@ -1,3 +1,6 @@
-let user = {sayHi() {console.log("Hello!");}}
+let users = [
+    {id : 1, name:"John"},
+    {id : 2, name:"Jane"},
+];
 
-console.log(user);
+console.log(users.findIndex(item => item.name === "Jane"));
