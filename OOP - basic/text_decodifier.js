@@ -51,15 +51,13 @@ const importantInfoGet = {
 
 const codificatingText = {//object with the form to codificate
     codificate : [],//text codificate
-    roundCodificate : [],
     codeInStringForm : "",//codefication to show
     codificating(text){
         for(let i = 0; i < text.length; i++){//to pass all character and transform each in a codification
             let code = text.codePointAt(i).toString();//transform the specificy character in a code
             this.codificate.push(code * 0.5);//to get more codificate, get half of them
         }
-        this.roundCodificate = this.codificate.map(item => Math.round(item));//round codificate transform the float values into a normal number
-        this.codeInStringForm = this.roundCodificate.join(' ');//join to a string with all codes
+        this.codeInStringForm = this.codificate.join(' ');//join to a string with all codes
         showText.showCodefication(this.codeInStringForm);
     }
 }
@@ -70,13 +68,17 @@ const decodificatingText= {
     decodificating(code){
         this.normalCode = code.map(item => item * 2);
         this.decodificate = this.normalCode.map(item => String.fromCodePoint(item)).toString();
+        showText.showDecodification(this.decodificate);
     }
 }
 
 const showText = {
     showCodefication(textCode){
-        console.log(`codificate text:\n${textCode}`)
+        console.log(`codificate text:\n${textCode}`);
+    },
+    showDecodification(text){
+        console.log(`decodificate text:\n${text}`);
     }
 }
 
-getText((userText) => codificatingText.codificating(userText));//test
+importantInfoGet.whichIs();
