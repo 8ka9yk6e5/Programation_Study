@@ -5,21 +5,24 @@ const importantInfoGet = {
         const rl = readline.createInterface({
             input : process.stdin,
             output : process.stdout
-        })
+        });
 
         rl.question("What do you want to do?\n1-Encode text\n2-Decode text\n", (userEnter =>{
             rl.close();
-            switch (userEnter){
-                case 1:
-                    this.getTextCodeficate((userText) => codificatingText.codificating(userText));
-                    break;
-                case 2:
-                    this.getTextDecodeficate((userText) => decodificatingText.decodificating(userText));
-                    break;
-                default:
-                    console.log("ERROR - out of range")
-                    break;
+            if(!isNaN(userEnter)){//to verify if it's a real number
+                switch (Number(userEnter)){
+                    case 1:
+                        this.getTextCodeficate((userText) => codificatingText.codificating(userText));
+                        break;
+                    case 2:
+                        this.getTextDecodeficate((userText) => decodificatingText.decodificating(userText));
+                        break;
+                    default:
+                        console.log("ERROR - out of range");
+                        break;
+                }
             }
+            else console.log("ERROR - not a allowed value (number)");
         }))
     },
 
@@ -27,26 +30,27 @@ const importantInfoGet = {
         const rl = readline.createInterface({
             input : process.stdin,
             output : process.stdout
-        })
+        });
 
         rl.question("(only allowed code in app style - NN NN)\nEnter the code:\n", (userEnter) => {
             rl.close();
-            callback(userEnter);
-        })
+            const userEnterArray = userEnter.split(" ");
+            callback(userEnterArray);
+        });
     },
 
     getTextCodeficate(callback) {//to user enter the text to codificate it
         const rl = readline.createInterface({
             input : process.stdin,
             output : process.stdout
-        })
+        });
 
         rl.question("Enter the text to codificate them:\n", (userEnter) => {
             rl.close();
             callback(userEnter);
-        })
+        });
     }
-}
+};
 
 
 const codificatingText = {//object with the form to codificate
@@ -60,7 +64,7 @@ const codificatingText = {//object with the form to codificate
         this.codeInStringForm = this.codificate.join(' ');//join to a string with all codes
         showText.showCodefication(this.codeInStringForm);
     }
-}
+};
 
 const decodificatingText= {//make the decotification
     decodificate : "",
@@ -70,7 +74,7 @@ const decodificatingText= {//make the decotification
         this.decodificate = this.normalCode.map(item => String.fromCodePoint(item)).toString().join();//transform it to a real text
         showText.showDecodification(this.decodificate);
     }
-}
+};
 
 const showText = {//to show the result
     showCodefication(textCode){//for codification
@@ -79,6 +83,6 @@ const showText = {//to show the result
     showDecodification(text){//for decotification
         console.log(`decodificate text:\n${text}`);
     }
-}
+};
 
 importantInfoGet.whichIs();//to start the code
