@@ -69,9 +69,11 @@ const codificatingText = {//object with the form to codificate
 const decodificatingText= {//make the decotification
     decodificate : "",
     normalCode : [],
-    decodificating(code){
+    textFromCode : [],
+    decodificating(code){//bug at this part
         this.normalCode = code.map(item => item * 2);//transform the half code to complete code
-        this.decodificate = this.normalCode.map(item => String.fromCodePoint(item)).toString().join();//transform it to a real text
+        this.textFromCode = this.normalCode.map(item => String.fromCodePoint(item));//transform the code in the array to a array with the lettera
+        this.decodificate = this.textFromCode.join("");//transform the array with letters in a text
         showText.showDecodification(this.decodificate);
     }
 };
