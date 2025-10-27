@@ -24,7 +24,15 @@ const importantInfoGet = {
     },
 
     getTextDecodeficate(callback){
+        const rl = readline.createInterface({
+            input : process.stdin,
+            output : process.stdout
+        })
 
+        rl.question("(only allowed code in app style - NN NN)\nEnter the code:\n", (userEnter) => {
+            rl.close();
+            callback(userEnter);
+        })
     },
 
     getTextCodeficate(callback) {//function to user enter the text
