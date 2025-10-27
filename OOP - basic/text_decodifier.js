@@ -1,8 +1,8 @@
 const readline = require("readline");
 
 const importantInfoGet = {
-    whichIs(callback) {
-        const rl = readline.createinterface({
+    whichIs(callback) {//to control what user want to make
+        const rl = readline.createInterface({
             input : process.stdin,
             output : process.stdout
         })
@@ -23,7 +23,7 @@ const importantInfoGet = {
         }))
     },
 
-    getTextDecodeficate(callback){
+    getTextDecodeficate(callback){//to user enter the code to decotificate it
         const rl = readline.createInterface({
             input : process.stdin,
             output : process.stdout
@@ -35,7 +35,7 @@ const importantInfoGet = {
         })
     },
 
-    getTextCodeficate(callback) {//function to user enter the text
+    getTextCodeficate(callback) {//to user enter the text to codificate it
         const rl = readline.createInterface({
             input : process.stdin,
             output : process.stdout
@@ -62,23 +62,23 @@ const codificatingText = {//object with the form to codificate
     }
 }
 
-const decodificatingText= {
+const decodificatingText= {//make the decotification
     decodificate : "",
     normalCode : [],
     decodificating(code){
-        this.normalCode = code.map(item => item * 2);
-        this.decodificate = this.normalCode.map(item => String.fromCodePoint(item)).toString();
+        this.normalCode = code.map(item => item * 2);//transform the half code to complete code
+        this.decodificate = this.normalCode.map(item => String.fromCodePoint(item)).toString().join();//transform it to a real text
         showText.showDecodification(this.decodificate);
     }
 }
 
-const showText = {
-    showCodefication(textCode){
+const showText = {//to show the result
+    showCodefication(textCode){//for codification
         console.log(`codificate text:\n${textCode}`);
     },
-    showDecodification(text){
+    showDecodification(text){//for decotification
         console.log(`decodificate text:\n${text}`);
     }
 }
 
-importantInfoGet.whichIs();
+importantInfoGet.whichIs();//to start the code
