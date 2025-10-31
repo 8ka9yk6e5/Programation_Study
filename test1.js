@@ -3,4 +3,6 @@ let users = [
     {id : 2, name:"Jane"},
 ];
 
-console.log(users.findIndex(item => item.name === "Jane"));
+let jsonUsers = JSON.stringify(users);
+
+console.log(jsonUsers);
