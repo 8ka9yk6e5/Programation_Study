@@ -18,7 +18,7 @@ const enterFromUser = {//to get the user entry
         console.log(`Losed lifes - ${lifeSystem.losedLifes}`)
         rl.question("Enter the number to try to discovery it:\n", (userEnter => {
             rl.close();
-            if (enterFromUser.verificationOfEnter(userEnter)) toCompare(userEnter, results, enterFromUser.enter, lifeSystem);
+            if (enterFromUser.verificationOfEnter(userEnter)) toCompare(Number(userEnter), results, enterFromUser.enter, lifeSystem);
             else {
                 console.log("ERROR - invalid number or value entered")
                 enterFromUser.enter(comparingNumber);
@@ -27,7 +27,7 @@ const enterFromUser = {//to get the user entry
     },
 
     verificationOfEnter(userNum) {
-        Math.round(userNum);
+        userNum = Math.round(userNum);
         if (!isNaN(userNum) && userNum > 0 && userNum <= 100) return true;
         else return false;
     },
