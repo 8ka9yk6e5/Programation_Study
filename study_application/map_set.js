@@ -138,3 +138,25 @@ console.log("with for each loop");
 iSet.forEach((value, valueAgain, set)=>{
     console.log(value);
 });
+
+console.log("\n\n\n");
+//weak map - is equal as map, but the key must be an object, doesn't has iteration
+
+const weakMap = new WeakMap();//works equal a map, with set, get and etc
+
+const obj1 = {};
+
+weakMap.set(obj1, "this is an pair");
+
+console.log(`${weakMap.get(obj1)}\n`);
+
+console.log("\n\n");
+//weak set - is equals as set, but with only objects, doesn't be an iterator
+
+const weakSet = new WeakSet();
+
+weakSet.add(mary)
+    .add(john)
+    .add(pete);
+
+console.log(`a value of a weak set: ${weakSet.has(pete)}`);
