@@ -160,8 +160,76 @@ console.log("index before the number: " + arrToFind.findLastIndex((item, index, 
 
 const arrToFilter = ['4','r','r','4','y','1','5','4','l','1','5','7'];
 
-console.log("real letters: " + arrToFilter.filter((item,index) => {if(isNaN(Number(item))) return item;}));
+console.log("real letters: " + arrToFilter.filter((item,index) => {if(!isNaN(Number(item))) return item;}));
 
 console.log('\n\n')
 
-//transform an array
+    //transform an array
+
+//map
+
+const namesArr = ['John', 'Mark', 'Ana', 'Cibeli'];
+
+const namesLengthArr = namesArr.map((item) => item.length);
+
+console.log(namesArr);
+console.log(namesLengthArr);
+
+console.log('\n\n');
+
+//sort
+
+const nums = [3,6,15];
+
+nums.sort();//make in lexicpgraphic form
+
+console.log(nums);
+
+//to correct it add a function with correct order to sort
+
+function order(a,b){
+    if (a > b) return 1;
+    if (a == b) return 0;
+    if (a < b) return -1;
+}
+
+nums.sort(order);
+
+console.log(`correct: ${nums}`);
+
+//or simplyer
+
+console.log(`simple: ${[5,30,25,4,-2].sort((a,b) => a - b)}`);
+
+console.log('\n\n');
+
+//reverse
+
+const rArr = ['first', 'second', 'third', 'fourth'];
+
+console.log(`reverse: ${rArr.reverse()}\n\n`);
+
+//split - string to array
+
+const str = 'John, Mary, Pete, Cibeli';
+const strToArr = str.split(', ');
+
+console.log(`str: ${str} - ${typeof str}\narray: ${strToArr} - ${typeof strToArr}\n\n`);
+
+//join - array to string
+
+const arrToStr = ['I','don\'t','be'];
+const StrTransformed = arrToStr.join(' ');
+
+console.log(`array: ${arrToStr} - ${typeof arrToStr}\nstring: ${StrTransformed} - ${typeof StrTransformed}\n\n`);
+
+//reduce and reduceRight
+//both work equals, but reduceRight start at right and go to left
+
+const numbers = [4,5,6,2,7,12,654,78,-987];
+
+console.log(`sum: ${numbers.reduce((sum, current) => sum + current)}\n\n`);
+
+//isArray - to verify if is an array
+
+console.log(`is an array: ${Array.isArray([])}`);
