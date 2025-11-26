@@ -6,15 +6,17 @@ const readline = require('node:readline');
 const {stdin : input, stdout : output} = require('node:process');
 
 const gettingInformations = {
-    timeOfSet : 0,
+    timeOfWork : 0,
     timeOfRest : 0,
     sets : 0,
-    getTimeOfSet(){
+    setsPassed : 0,
+    next : 'work',
+    getTimeOfWork(){
         const rl = readline.createInterface({input, output});
 
         rl.question('(in minutes)\nHow much time be each set?\n', (userEnter) => {
             if (!isNaN(Number(userEnter)) && userEnter > 0) {
-                this.timeOfSet = Number(userEnter);
+                this.timeOfWork = Number(userEnter);
                 rl.close();
             }
             else {
@@ -55,10 +57,25 @@ const gettingInformations = {
                 this.getQuantityOfSets();
             }
         })
+    },
+    callCounter(){
+        if  (!(setsPassed == sets)){
+            if(this.next == 'work'){
+                this.next = 'rest';
+                counter(this.timeOfWork);
+            }
+            else if (this.next == 'rest'){
+                this.next = 'work';
+                counter(this.timeOfRest);
+                this.setsPassed++;
+            }
+        }
+        else console.error("Complete cicle");
     }
 }
 
-function counter(timeToPass, passed, callback){
+function counter(timeToPass, callback){
+    let passed = 0;
     setInterval(() => {
         if (passed == timeToPass){
             callback();
@@ -68,4 +85,6 @@ function counter(timeToPass, passed, callback){
     }, 6000);
 }
 
+{
 
+}
