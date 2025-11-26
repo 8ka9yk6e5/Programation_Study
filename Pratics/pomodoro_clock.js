@@ -10,7 +10,7 @@ const gettingInformations = {
     getTimeOfSet(){
         const rl = readline.createInterface({input, output});
 
-        rl.question('(in minutes)How much time be each set?\n', (userEnter) => {
+        rl.question('(in minutes)\nHow much time be each set?\n', (userEnter) => {
             if (!isNaN(Number(userEnter)) && userEnter > 0) {
                 this.timeOfSet = Number(userEnter);
                 rl.close();
@@ -26,10 +26,22 @@ const gettingInformations = {
     },
     getTimeOfRest(){
         const rl = readline.createInterface({input, output});
+
+        rl.question('(in minutes)\nHow much time be the interval?\n', (userEnter) =>{
+            if(!isNaN(Number(userEnter)) && userEnter > 0){
+                this.timeOfRest = Number(userEnter);
+                rl.close();
+            }
+            else{
+                console.log('ERROR - invalid value');
+                rl.close();
+                this.getTimeOfRest();
+            }
+        })
     },
     getQuantityOfSets(){
         const rl = readline.creationInterface({input, output});
     }
 }
 
-gettingInformations.getTimeOfSet();
+gettingInformations.getTimeOfRest();
