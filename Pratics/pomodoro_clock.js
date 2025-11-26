@@ -6,7 +6,7 @@ const {stdin : input, stdout : output} = require('node:process');
 const gettingInformations = {
     timeOfSet : 0,
     timeOfRest : 0,
-    Sets : 0,
+    sets : 0,
     getTimeOfSet(){
         const rl = readline.createInterface({input, output});
 
@@ -41,7 +41,17 @@ const gettingInformations = {
     },
     getQuantityOfSets(){
         const rl = readline.creationInterface({input, output});
+
+        rl.question('How much times repeat?\n', (userEnter) => {
+            if (!isNaN(Number(userEnter)) && userEnter > 0) {
+                this.sets = Number(userEnter);
+                rl.close();
+            }
+            else { 
+                console.log('ERROR - invalid value');
+                rl.close();
+                this.getQuantityOfSets();
+            }
+        })
     }
 }
-
-gettingInformations.getTimeOfRest();
