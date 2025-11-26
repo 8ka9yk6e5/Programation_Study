@@ -1,4 +1,6 @@
-//creation of a pomodoro clock only using code, without an API
+/*
+    a form to pass the time
+*/
 
 const readline = require('node:readline');
 const {stdin : input, stdout : output} = require('node:process');
@@ -40,7 +42,7 @@ const gettingInformations = {
         })
     },
     getQuantityOfSets(){
-        const rl = readline.creationInterface({input, output});
+        const rl = readline.createInterface({input, output});
 
         rl.question('How much times repeat?\n', (userEnter) => {
             if (!isNaN(Number(userEnter)) && userEnter > 0) {
@@ -55,3 +57,15 @@ const gettingInformations = {
         })
     }
 }
+
+function counter(timeToPass, passed, callback){
+    setInterval(() => {
+        if (passed == timeToPass){
+            callback();
+            clearInterval();
+        }
+        passed++;
+    }, 6000);
+}
+
+
