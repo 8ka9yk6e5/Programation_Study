@@ -10,31 +10,33 @@ const gettingInformations = {
     timeOfRest : 0,
     sets : 0,
     setsPassed : 0,
-    next : 'work',
-    getTimeOfWork(){
+    working : true,
+    getTimeOfWork(callback, context){
         const rl = readline.createInterface({input, output});
 
-        rl.question('(in minutes)\nHow much time be each set?\n', (userEnter) => {
+        rl.question('(in minutes)\nHow much time be each focus time?\n', (userEnter) => {
             if (!isNaN(Number(userEnter)) && userEnter > 0) {
                 this.timeOfWork = Number(userEnter);
                 rl.close();
+                callback.call(context,this.getQuantityOfSets ,context)
             }
             else {
                 console.log("ERROR - invalid value");
                 rl.close();
-                this.getTimeOfSet();
+                this.getTimeOfWork();
             }
             
         });
         
     },
-    getTimeOfRest(){
+    getTimeOfRest(callback,context){
         const rl = readline.createInterface({input, output});
 
         rl.question('(in minutes)\nHow much time be the interval?\n', (userEnter) =>{
             if(!isNaN(Number(userEnter)) && userEnter > 0){
                 this.timeOfRest = Number(userEnter);
                 rl.close();
+                callback.call(context, this.callCounter, context);
             }
             else{
                 console.log('ERROR - invalid value');
@@ -43,13 +45,14 @@ const gettingInformations = {
             }
         })
     },
-    getQuantityOfSets(){
+    getQuantityOfSets(callback, context){
         const rl = readline.createInterface({input, output});
 
         rl.question('How much times repeat?\n', (userEnter) => {
             if (!isNaN(Number(userEnter)) && userEnter > 0) {
                 this.sets = Number(userEnter);
                 rl.close();
+                callback.call(context);
             }
             else { 
                 console.log('ERROR - invalid value');
@@ -59,14 +62,14 @@ const gettingInformations = {
         })
     },
     callCounter(){
-        if  (!(setsPassed == sets)){
-            if(this.next == 'work'){
-                this.next = 'rest';
-                counter(this.timeOfWork);
+        if  (!(this.setsPassed == this.sets)){
+            if(this.working){
+                this.next = false;
+                counter(this.timeOfWork,this.callCounter, gettingInformations);
             }
-            else if (this.next == 'rest'){
-                this.next = 'work';
-                counter(this.timeOfRest);
+            else{
+                this.next = true;
+                counter(this.timeOfRest, this.callCounter, gettingInformations);
                 this.setsPassed++;
             }
         }
@@ -74,17 +77,15 @@ const gettingInformations = {
     }
 }
 
-function counter(timeToPass, callback){
+function counter(timeToPass, callback, context){
     let passed = 0;
-    setInterval(() => {
+    const id = setInterval(() => {
         if (passed == timeToPass){
-            callback();
-            clearInterval();
+            callback.call(context);
+            clearInterval(id);
         }
         passed++;
-    }, 6000);
+    }, 60000);
 }
 
-{
-
-}
+gettingInformations.getTimeOfWork.call(gettingInformations, this.getTimeOfRest, gettingInformations);
