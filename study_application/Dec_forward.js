@@ -138,8 +138,6 @@ function musicDecorator(callback, hash, context){
 // console.log(showFavMusic("mus5", "mus6", 'mus7', 'mus8'));
 // console.log(showFavMusic("mus5", "mus6", 'mus7', 'mus8'));
 
-//favorite games and daily routine
-
 //method borrowing: an infinite hash, to any quantity of arguments
 
 function multiHash(...args){
