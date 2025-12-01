@@ -6,9 +6,9 @@ const readline = require('node:readline');
 const {stdin : input, stdout : output} = require('node:process');
 
 const gettingInformations = {
-    timeOfWork : 0,
-    timeOfRest : 0,
-    sets : 0,
+    timeOfWork : 0,//time of focus
+    timeOfRest : 0,//time to relax
+    sets : 0,//how much times that repeat
     setsPassed : 0,
     working : true,
     getTimeOfWork(callback, context){
@@ -18,14 +18,13 @@ const gettingInformations = {
             if (!isNaN(Number(userEnter)) && userEnter > 0) {
                 this.timeOfWork = Number(userEnter);
                 rl.close();
-                callback.call(context,this.getQuantityOfSets ,context)
+                callback.call(context,this.getQuantityOfSets ,context);
             }
             else {
                 console.log("ERROR - invalid value");
                 rl.close();
-                this.getTimeOfWork();
+                this.getTimeOfWork(callback,context);
             }
-            
         });
         
     },
@@ -41,7 +40,7 @@ const gettingInformations = {
             else{
                 console.log('ERROR - invalid value');
                 rl.close();
-                this.getTimeOfRest();
+                this.getTimeOfRest(callback,context);
             }
         })
     },
@@ -57,18 +56,21 @@ const gettingInformations = {
             else { 
                 console.log('ERROR - invalid value');
                 rl.close();
-                this.getQuantityOfSets();
+                this.getQuantityOfSets(callback, context);
             }
         })
     },
     callCounter(){
+        console.clear();
         if  (!(this.setsPassed == this.sets)){
             if(this.working){
-                this.next = false;
+                console.warn("Time to work!");
+                this.working = false;
                 counter(this.timeOfWork,this.callCounter, gettingInformations);
             }
             else{
-                this.next = true;
+                console.warn("Time to rest!");
+                this.working = true;
                 counter(this.timeOfRest, this.callCounter, gettingInformations);
                 this.setsPassed++;
             }
@@ -85,7 +87,7 @@ function counter(timeToPass, callback, context){
             clearInterval(id);
         }
         passed++;
-    }, 60000);
+    }, 6000);
 }
 
-gettingInformations.getTimeOfWork.call(gettingInformations, this.getTimeOfRest, gettingInformations);
+gettingInformations.getTimeOfWork.call(gettingInformations, gettingInformations.getTimeOfRest, gettingInformations);
