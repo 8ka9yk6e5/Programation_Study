@@ -4,7 +4,7 @@ This repository is focused on showing my evolution and learning path, mainly thr
 
 ## *CURRENT FOCUS*
 
-I'm focused on learning *JavaScript for backend development*, using node.js to work with APIs. After studying this language, I I plain to learn TypeScript for a more focused understanding.
+I'm focused on learning *JavaScript for backend development*, using node.js to work with APIs. After studying this language, I plain to learn TypeScript for a more focused understanding.
 As a secondary focus, *I'm learning git/github and postgreSQL*, but I still haven't learned how to apply SQL or API features yet.
 
 ---
@@ -51,6 +51,9 @@ Files *applying commands and new features* to learn how each one works and how t
 - [x] iterables.js - Transforming into iterables and using them;
 - [x] map_set.js - Use and functions of Map, Set, WeakMap, and WeakSet;
 - [x] obj_constructor.js - Application of constructors;
+- [x] chaining.js - Application of optional chaining, with the "?." symbol;
+- [x] symbol.js - Application of symbol primitive type;
+- [x] obj_to_primitive_conversion.js - Application of object conversion 
 
 ---
 
