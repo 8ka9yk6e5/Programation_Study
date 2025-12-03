@@ -4,36 +4,37 @@ const investmentInformation = {//informations important to code
     quantity : 0,
     taxInPeriod : 0,
     time : 0,
-    interest() {return (this.quantity + (this.quantity * this.taxInPeriod * this.time))},//used when don't have a acumulated interest, used in short time
-    compoundInterest() {return (this.quantity + (this.quantity * (1 + this.taxInPeriod) ** this.time))}//with acumulated interest, used in medium or long time
+    result : 0,
+    interest() {this.result = (this.quantity + (this.quantity * this.taxInPeriod * this.time))},//used when don't have a acumulated interest, used in short time
+    compoundInterest() {this.result = (this.quantity + (this.quantity * (1 + this.taxInPeriod) ** this.time))}//with acumulated interest, used in medium or long time
 };
 
 const gettingInfo = {//methods to get important values from user
-    typeOfInvestment(callbackCompound, callback) {//to type of them // need to correct there
+    typeOfInvestment(context, callbackCompound, callback) {//to type of them // need to correct there
         const rl = readline.createInterface({
             input : process.stdin,
             output : process.stdout
         })
-        rl.question(`(response with number)\nYour investment is for a:\n1-long period\n2-medium period\n3-short period\n`, (userEnter) => {
-            if(!isNaN(Number(userEnter))){
+        rl.question(`(response with number)\nYour investment is for a:\n1-long period\n2-medium period\n3-short period\n`, (userEnter) => {//bug here
+            if(!isNaN(Number(userEnter)) && [1,2,3].includes(userEnter)){
                 switch (userEnter){
                     case 1:
                     case 2:
-                        const compoundResult = callbackCompound();
-                        return compoundResult;
+                        callbackCompound.call(context);
+                        rl.close();
                         break;
                     case 3:
-                        const result = callback();
-                        return result;
-                        break;
-                    default:
-                        console.log("ERROR - Invalid argument");//give an error if the value don't correspond w ith others
+                        callback.call(context);
+                        rl.close();
                         break;
                 } 
-
+            }
+            else{
+                console.log("ERROR - Invalid argument");//give an error if the value don't correspond w ith others
+                rl.close();
+                this.typeOfInvestment();
             }
         })
-        rl.close();
     },
 
     quantityEnter(context, callback) {//quantity to invest
@@ -72,24 +73,23 @@ const gettingInfo = {//methods to get important values from user
             output : process.stdout
         })
         rl.question("What is time type which you want to maintain the investment:\n1-For a time\n2-until the end of investment\n", (userEnter) =>{
-            if(!isNaN(Number(userEnter))){
+            if(!isNaN(Number(userEnter) && [1, 2].includes(userEnter))){
                 switch(Number(userEnter)){
                     case 1:
+                        rl.close();
                         timeOfInvestment.enterTheTimeWhichBeMaintained();
                         break;
                     case 2:
+                        rl.close();
                         timeOfInvestment.calculateDateRemaining(timeOfInvestment.endOfTheInvestment());
-                        break;
-                    default:
-                        console.log("ERROR - Invalid argument");//if are other value which don't is allowed
                         break;
                 }
             }
             else{
                 console.log("ERROR - invalid value");
+                rl.close();
                 this.whichTypeOfTime();
             }
-            rl.close();
         })
     }
 }
@@ -101,7 +101,7 @@ const timeOfInvestment = {
           output :process.stdout
         });
 
-        rl.question("How much months the investment will be maintained?\n", (userEnter) => {
+        rl.question("How much months the investment will be maintained?\n", (userEnter) => {//bug here
             if (!isNaN(userEnter) && userEnter > 0) {
                 investmentInformation.time = userEnter;
                 rl.close();
@@ -140,8 +140,7 @@ const timeOfInvestment = {
 }
 
 function show(){
-    const result = gettingInfo.typeOfInvestment(investmentInformation.compoundInterest, investmentInformation.interest)
-    console.warn(`the returned value will be : ${result}`);//calculate and show to user
+    gettingInfo.typeOfInvestment.call(investmentInformation ,investmentInformation,investmentInformation.compoundInterest, investmentInformation.interest)
 }
 
-gettingInfo.quantityEnter.call(gettingInfo, gettingInfo, gettingInfo.gettingTaxInPeriod);
+gettingInfo.quantityEnter(gettingInfo, gettingInfo.gettingTaxInPeriod);
