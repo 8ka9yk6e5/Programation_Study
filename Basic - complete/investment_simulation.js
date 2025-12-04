@@ -5,8 +5,16 @@ const investmentInformation = {//informations important to code
     taxInPeriod : 0,
     time : 0,
     result : 0,
-    interest() {this.result = (this.quantity + (this.quantity * this.taxInPeriod * this.time))},//used when don't have a acumulated interest, used in short time
-    compoundInterest() {this.result = (this.quantity + (this.quantity * (1 + this.taxInPeriod) ** this.time))}//with acumulated interest, used in medium or long time
+    interest() {
+        this.result = (this.quantity + (this.quantity * this.taxInPeriod * this.time));
+        console.warn(`the returned value will be : ${this.result}`);//calculate and show to user
+        process.exit();
+    },//used when don't have a acumulated interest, used in short time
+    compoundInterest() {
+        this.result = (this.quantity + (this.quantity * (1 + this.taxInPeriod) ** this.time));
+        console.warn(`the returned value will be : ${this.result}`);//calculate and show to user
+        process.exit();
+    }//with acumulated interest, used in medium or long time
 };
 
 const gettingInfo = {//methods to get important values from user
@@ -16,8 +24,8 @@ const gettingInfo = {//methods to get important values from user
             output : process.stdout
         })
         rl.question(`(response with number)\nYour investment is for a:\n1-long period\n2-medium period\n3-short period\n`, (userEnter) => {//bug here
-            if(!isNaN(Number(userEnter)) && [1,2,3].includes(userEnter)){
-                switch (userEnter){
+            if(!isNaN(Number(userEnter)) && [1,2,3].includes(Number(userEnter))){
+                switch (+userEnter){
                     case 1:
                     case 2:
                         callbackCompound.call(context);
@@ -140,7 +148,7 @@ const timeOfInvestment = {
 }
 
 function show(){
-    gettingInfo.typeOfInvestment.call(investmentInformation ,investmentInformation,investmentInformation.compoundInterest, investmentInformation.interest)
+    gettingInfo.typeOfInvestment.call(gettingInfo ,investmentInformation,investmentInformation.compoundInterest, investmentInformation.interest)
 }
 
 gettingInfo.quantityEnter(gettingInfo, gettingInfo.gettingTaxInPeriod);
