@@ -54,7 +54,7 @@ const gettingInfo = {//methods to get important values from user
             if (!Number.isNaN(userEnter) && userEnter > 0) {//see if is a realy a number and is more than 0
                 investmentInformation.quantity = userEnter;//save the quantity
                 rl.close();
-                callback.call(context, this.whichTypeOfTime);
+                callback.call(context, this.whichTypeOfTime, context);
             } else {
                 console.log("ERROR - The enter is too low or isn't a number");//show an error
                 rl.close();
@@ -63,7 +63,7 @@ const gettingInfo = {//methods to get important values from user
         })
     },
 
-    gettingTaxInPeriod(callback) {
+    gettingTaxInPeriod(callback, context) {
         const rl = readline.createInterface({
             input : process.stdin,
             output : process.stdout
@@ -73,7 +73,7 @@ const gettingInfo = {//methods to get important values from user
             if (!isNaN(Number(userEnter)) && userEnter > 0){
                 investmentInformation.taxInPeriod = userEnter/100;//update to a percentage the current tax
                 rl.close();
-                callback();
+                callback.call(context);
             }
             else {
                 console.log("ERROR - The enter is too low or isn't a number");//error if don't correspond of allowed value
@@ -89,7 +89,7 @@ const gettingInfo = {//methods to get important values from user
             output : process.stdout
         })
         rl.question("What is time type which you want to maintain the investment:\n1-For a time\n2-until the end of investment\n", (userEnter) =>{
-            if(!isNaN(Number(userEnter) && [1, 2].includes(userEnter))){
+            if(!isNaN(Number(userEnter)) && [1, 2].includes(Number(userEnter))){
                 switch(Number(userEnter)){
                     case 1:
                         rl.close();
