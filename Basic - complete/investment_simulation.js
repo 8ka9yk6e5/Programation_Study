@@ -75,7 +75,11 @@ const gettingInfo = {//methods to get important values from user
                 rl.close();
                 callback();
             }
-            else console.log("ERROR - The enter is too low or isn't a number");//error if don't correspond of allowed value
+            else {
+                console.log("ERROR - The enter is too low or isn't a number");//error if don't correspond of allowed value
+                rl.close();
+                this.gettingTaxInPeriod(callback);
+            }
         })
     },
 
