@@ -55,7 +55,11 @@ const gettingInfo = {//methods to get important values from user
                 investmentInformation.quantity = userEnter;//save the quantity
                 rl.close();
                 callback.call(context, this.whichTypeOfTime);
-            } else console.log("ERROR - The enter is too low or isn't a number");//show an error
+            } else {
+                console.log("ERROR - The enter is too low or isn't a number");//show an error
+                rl.close();
+                this.quantityEnter(context, callback);
+            }
         })
     },
 
