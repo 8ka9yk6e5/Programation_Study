@@ -78,7 +78,7 @@ const gettingInfo = {//methods to get important values from user
             else {
                 console.log("ERROR - The enter is too low or isn't a number");//error if don't correspond of allowed value
                 rl.close();
-                this.gettingTaxInPeriod(callback);
+                this.gettingTaxInPeriod(callback, context);
             }
         })
     },
@@ -97,7 +97,7 @@ const gettingInfo = {//methods to get important values from user
                         break;
                     case 2:
                         rl.close();
-                        timeOfInvestment.calculateDateRemaining(timeOfInvestment.endOfTheInvestment());
+                        timeOfInvestment.endOfTheInvestment();
                         break;
                 }
             }
@@ -131,6 +131,12 @@ const timeOfInvestment = {
         });
     },
 
+    dateValidor(str){//to verify if the string is a valid date value
+        const [M, D, Y] = str.split('-').map(Number);
+        if(!M || !D || !Y) return false;
+        return true;
+    },
+
     endOfTheInvestment(){//to get the date which the investment end
         const rl = readline.createInterface({
             input : process.stdin,
@@ -138,8 +144,8 @@ const timeOfInvestment = {
         });
 
         rl.question("MM-DD-YYYY\nEnter the end date of the investment:\n",(userEnter)=> {
-            const date = new Date(userEnter);
-            if(!isNaN(date.getTime())){
+            if(this.dateValidor(userEnter)){
+                const date = new Date(userEnter);
                 rl.close();
                 const timeRemaining = Math.ceil((date - new Date()) / ((1000 * 60 * 60 * 24) *30.44));
                 //transform the user enter of end date to how much months will pass
@@ -150,7 +156,7 @@ const timeOfInvestment = {
                 console.log("ERROR - this is'nt correspond with a date");
                 rl.close();
                 this.endOfTheInvestment();
-            }//error if the userEnter doesn't correspond to a date
+            }//error if the userEnter doesn't correspond to a date  
         });
     }
 }
@@ -160,3 +166,5 @@ function show(){
 }
 
 gettingInfo.quantityEnter(gettingInfo, gettingInfo.gettingTaxInPeriod);
+
+//correct the error logs and the error fluxe
