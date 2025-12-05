@@ -7,12 +7,12 @@ const investmentInformation = {//informations important to code
     result : 0,
     interest() {
         this.result = (this.quantity + (this.quantity * this.taxInPeriod * this.time));
-        console.warn(`the returned value will be : ${this.result}`);//calculate and show to user
+        console.warn(`the returned value will be : ${this.result.toFixed(2)}`);//calculate and show to user
         process.exit();
     },//used when don't have a acumulated interest, used in short time
     compoundInterest() {
-        this.result = (this.quantity + (this.quantity * (1 + this.taxInPeriod) ** this.time));
-        console.warn(`the returned value will be : ${this.result}`);//calculate and show to user
+        this.result = (this.quantity * (1 + this.taxInPeriod) ** this.time);
+        console.warn(`the returned value will be : ${this.result.toFixed(2)}`);//calculate and show to user
         process.exit();
     }//with acumulated interest, used in medium or long time
 };
@@ -40,7 +40,7 @@ const gettingInfo = {//methods to get important values from user
             else{
                 console.log("ERROR - Invalid argument");//give an error if the value don't correspond w ith others
                 rl.close();
-                this.typeOfInvestment();
+                this.typeOfInvestment(context, callbackCompound, callback);
             }
         })
     },
@@ -52,7 +52,7 @@ const gettingInfo = {//methods to get important values from user
         })
         rl.question("Enter the quantity to Invest:\n", (userEnter) => {//to get the quantity
             if (!Number.isNaN(userEnter) && userEnter > 0) {//see if is a realy a number and is more than 0
-                investmentInformation.quantity = userEnter;//save the quantity
+                investmentInformation.quantity = Number(userEnter);//save the quantity
                 rl.close();
                 callback.call(context, this.whichTypeOfTime, context);
             } else {
@@ -119,7 +119,7 @@ const timeOfInvestment = {
 
         rl.question("How much months the investment will be maintained?\n", (userEnter) => {//bug here
             if (!isNaN(userEnter) && userEnter > 0) {
-                investmentInformation.time = userEnter;
+                investmentInformation.time = Number(userEnter);
                 rl.close();
                 show();
             }
@@ -131,7 +131,7 @@ const timeOfInvestment = {
         });
     },
 
-    dateValidor(str){//to verify if the string is a valid date value
+    dateValidator(str){//to verify if the string is a valid date value
         const [M, D, Y] = str.split('-').map(Number);
         if(!M || !D || !Y) return false;
         return true;
@@ -144,12 +144,12 @@ const timeOfInvestment = {
         });
 
         rl.question("MM-DD-YYYY\nEnter the end date of the investment:\n",(userEnter)=> {
-            if(this.dateValidor(userEnter)){
+            if(this.dateValidator(userEnter)){
                 const date = new Date(userEnter);
                 rl.close();
                 const timeRemaining = Math.ceil((date - new Date()) / ((1000 * 60 * 60 * 24) *30.44));
                 //transform the user enter of end date to how much months will pass
-                investmentInformation.time = timeRemaining;
+                investmentInformation.time = Number(timeRemaining);
                 show();
             }
             else {
