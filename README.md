@@ -30,9 +30,9 @@ Files where I try to *apply the things I learn in complete programs*.
 - [x] film_recommend.js - A simple project that shows a film and its information;
 - [x] greater_less.js - With two predefined values, it tells which one is greater or smaller;
 - [x] how_much_days_lived.js - Gets predefined user information and calculates how many days the person has lived;
-- [ ] investment_simulation.js - *Incomplete* - A simple project where the user enters information and the code calculates the investment return;
+- [x] investment_simulation.js - A simple project where the user enters information and the code calculates the investment return;
 - [x] number_guess.js - A small game where the code picks a random number up to one hundred, and the user has to guess it, with a small life system;
-- [ ] pomodoro_clock.js - *In creation* - A simple pomodoro clock where the user gives the focus time, rest time, and how many repeats;
+- [x] pomodoro_clock.js - A simple pomodoro clock where the user gives the focus time, rest time, and how many repeats;
 - [x] quiz.js - A simple quiz with predefined values, used to start applying control flow;
 - [x] text_decodifier.js - Gets text from the user and converts it to a Unicode-like format, and also reverses it back;
 - [ ] user_informations.js - *Incomplete* - A project that works like a sign-up application, where the user enters information and the program confirms if everything is correct
@@ -41,19 +41,28 @@ Files where I try to *apply the things I learn in complete programs*.
 
 ## *study_application*
 
-Files *applying commands and new features* to learn how each one works and how to use them.
+Files *applying commands and new features* to learn how each one works and how to use them. Separated for javascript study and SQL study, which the SQL study is to use only for sql, not using with a javascript applycation.
 
-### *Files*
+### *Files - javascript*
 
 - [x] Array.js - Application of array methods and features;
-- [x] Dec_forward.js - Application of decorators and how they work, including call and apply for callbacks;
-- [ ] SQLTest.js - A first attempt at using SQL, not started;
-- [x] iterables.js - Transforming into iterables and using them;
-- [x] map_set.js - Use and functions of Map, Set, WeakMap, and WeakSet;
-- [x] obj_constructor.js - Application of constructors;
 - [x] chaining.js - Application of optional chaining, with the "?." symbol;
+- [x] Dec_forward.js - Application of decorators and how they work, including call and apply for callbacks;
+- [x] destruction.js - Application of the destruction syntax, from objects and arrays;
+- [x] iterables.js - Transforming into iterables and using them;
+- [x] JSON.js - Application of json values and its methods;
+- [x] map_set.js - Use and functions of Map, Set, WeakMap, and WeakSet;
+- [x] newFunction.js - Use of the syntax "new" in function, and how use it to create a function;
+- [x] NFE.js - The use of a function like a object, and it properties;
+- [x] obj_constructor.js - Application of constructors;
+- [x] obj_to_primitive_conversion.js - Application of object conversion;
+- [x] rest_spread.js - The use of "..." in functions, either in parameter(spread) or arguments(rest);
+- [x] Scheduling.js - Start use of Asynchronous programming, use of "setTimeout" and "setInterval";
 - [x] symbol.js - Application of symbol primitive type;
-- [x] obj_to_primitive_conversion.js - Application of object conversion 
+
+### *Files - SQL*
+
+- [ ] simple_commands.sql - first SQL file, to use the basic commands to understand how it works;
 
 ---
 
