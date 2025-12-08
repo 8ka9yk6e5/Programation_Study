@@ -1,72 +1,79 @@
-const readline = require("node:readline");//modules
+const readline = require('node:readline');
 
-const userInfo = {};//object to storage the user informations
+const {stdin:input, stdout:output} = require('node:process');
 
-const infoNeededToGet = ["Name", "Age", "Username", "Email", 
-    "Phone number", "Localization", "Gender", "Profession", 
-    "Register number", "Nacionality", "Weight", "Height", "Complete school"
-]//informations to get
+const questions = [
+    "What's your name?", 
+    "How old are you?", 
+    "What's your Username?", 
+    "What's your email?",
+    "What's your phone number?", 
+    "What's your current city/town?",
+    "Where are you from?",  
+    "What's your gender?", 
+    "What do you do for your living?",
+    "What's your register number?", 
+    "What's your weight?", 
+    "what's your height?", 
+    "Do you complete the school?\n(Y/N)"
+];
 
-const questions = ["What's your name?", "How old are you?", "What's your Username?", "What's your email?",
-    "What's your phone number?", "What's your current city/town?", "What's your gender?", "What do you do for your living?",
-    "What's your register number?", "Where are you from?", "What's your weight?", "what's your height?", "Do you complete the school?(Y/N)"
-]//questions to make and get the informations
+const informations = {
+    name : undefined,
+    age : undefined,
+    username : undefined,
+    email : undefined,
+    phoneNumber : undefined,
+    localization : {
+        cityTown : undefined,
+        country : undefined
+    },
+    gender : undefined,
+    work : undefined,
+    registerNumber : undefined,
+    size : {
+        weight : undefined,
+        height : undefined
+    },
+    completeSchool : undefined
+};
 
-//just to make, and enter the user informations
-function makingTheQuestions(informationsNeeded, questionsToMake){
-    const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-    });//create a interface to have the user enter
+const gettingInformations = {
+    //verificator if a question is for true or false
+    falseOrTrueVerification(question){
+        const arrQuestion = question.split('\n');
+        if (arrQuestion.includes('(Y/N)')) return true
+        else return false
+    },
 
-    nameToSave : for(let info of informationsNeeded){//to save the key
-        for(let ask of questionsToMake){//to mark which question is time to make
-
-            //if the question is for a yes or no response transform to true or false, transform that on a other new function
-            if (ask == "Do you complete the school?(Y/N)"){
-                rl.question(ask, function(infoSchool){
-                    if(infoSchool[0].toUpperCase == "Y"){
-                        userInfo.info = true
-                    }
-                    else userInfo.info = false;
-                })
-                continue;//pass to next iteration
-
+    getResponseOfTrueFalse(question){//end this code part
+        const rl = readline.emitKeypressEvents(input);//to get just a key
+        process.stdin.setRawMode(true);//define a non necessary enter press
+        console.log(question);
+        input.on('keypress', (notUsed, key) =>{
+            switch (key.name){
+                case 'y':
+                    informations.completeSchool = true;
+                    // input.removeListener('keypress');
+                    break;
+                case 'n':
+                    informations.completeSchool = false;
+                    // input.removeListener('keypress');
+                    break;
+                default:
+                    console.log("Invalid value enter");
+                    this.getResponseOfTrueFalse(question);
+                    // input.removeListener('keypress');
+                    break;
             }
-            //eles continues normally
-            rl.question(ask, function(informationGet){
-                userInfo.info = informationGet;
-            })
-        }
-    }
+        });
+    },
 
-    rl.close();
+    gettingResponses(question,callbackVerificator, callbackResponse){
+        question.forEach((value) => {
+
+        });
+    }
 }
 
-function show(){//function to show to user informations
-    console.clear();
-
-    for(let info in userInfo){
-        console.log(`${info} : ${userInfo[info]}`);
-    }
-
-    console.log('');
-    
-    const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-    });//create a interface to have the user enter
-
-    //to confirm the informations, create a function to it
-    rl.question("Is informations corrects?", function(enter){
-        if (enter[0].toUpperCase == "Y") console.log('\nRegistration complete\n');
-        else {
-            console.log('\nRegistration incomplete');
-            console.log("\nclosing aplication...");
-            process.exit(0);
-        }
-        rl.close();
-    })
-}
-
-const control = () => {makingTheQuestions();show();}
+// gettingInformations.getResponseOfTrueFalse(questions.at(-1));
