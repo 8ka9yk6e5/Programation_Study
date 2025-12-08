@@ -56,6 +56,7 @@ Files *applying commands and new features* to learn how each one works and how t
 - [x] NFE.js - The use of a function like a object, and it properties;
 - [x] obj_constructor.js - Application of constructors;
 - [x] obj_to_primitive_conversion.js - Application of object conversion;
+- [x] process.js - Application and study about the internal module of process, using some main commands;
 - [x] rest_spread.js - The use of "..." in functions, either in parameter(spread) or arguments(rest);
 - [x] Scheduling.js - Start use of Asynchronous programming, use of "setTimeout" and "setInterval";
 - [x] symbol.js - Application of symbol primitive type;
