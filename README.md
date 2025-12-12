@@ -45,6 +45,7 @@ Files *applying commands and new features* to learn how each one works and how t
 
 ### *Files - javascript*
 
+- [ ] APIuse.js - Use and application of API's;
 - [x] Array.js - Application of array methods and features;
 - [x] binding.js - The syntax of binding, the use and application of it;
 - [x] chaining.js - Application of optional chaining, with the "?." symbol;
