@@ -24,10 +24,14 @@ console.log(app.listen(3000));//port - value inside the parenteses
 //path also need equals from the work/test
 //functions need to receive request(req) and a response(res)  value
 
+const valueNeed = 'STROK';
+
 app.get('/', (req, res) => {
-    const data = req.query;//get the value returned
-    console.log(data);
-    const func = new Function(data.Function);
-    func();
-    res.send('received');//return a value, work as a "confirmation" message
+    const data = Object.values(req.query);//get the value returned
+    for(let value of data) {
+        if (value == valueNeed) res.send('str - true');
+    }
 });
+
+//res.send(<value>);
+//return a value, work as a "confirmation" message

@@ -51,6 +51,7 @@ Files *applying commands and new features* to learn how each one works and how t
 - [x] chaining.js - Application of optional chaining, with the "?." symbol;
 - [x] Dec_forward.js - Application of decorators and how they work, including call and apply for callbacks;
 - [x] destruction.js - Application of the destruction syntax, from objects and arrays;
+- [x] flags_descriptors.js - application and use of flags from properties;
 - [x] iterables.js - Transforming into iterables and using them;
 - [x] JSON.js - Application of json values and its methods;
 - [x] map_set.js - Use and functions of Map, Set, WeakMap, and WeakSet;
