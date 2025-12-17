@@ -52,7 +52,7 @@ Files *applying commands and new features* to learn how each one works and how t
 - [x] Dec_forward.js - Application of decorators and how they work, including call and apply for callbacks;
 - [x] destruction.js - Application of the destruction syntax, from objects and arrays;
 - [x] flags_descriptors.js - Application and use of flags from properties;
-- [x] get_set.js - application and correct use of the get and set properties from a propertye of an object
+- [x] get_set.js - application and correct use of the get and set properties from a propertye of an object;
 - [x] iterables.js - Transforming into iterables and using them;
 - [x] JSON.js - Application of json values and its methods;
 - [x] map_set.js - Use and functions of Map, Set, WeakMap, and WeakSet;
@@ -61,6 +61,7 @@ Files *applying commands and new features* to learn how each one works and how t
 - [x] obj_constructor.js - Application of constructors;
 - [x] obj_to_primitive_conversion.js - Application of object conversion;
 - [x] process.js - Application and study about the internal module of process, using some main commands;
+- [x] prototypal_inheritance.js - Syntax and application of inheritance and start about prototypies;
 - [x] rest_spread.js - The use of "..." in functions, either in parameter(spread) or arguments(rest);
 - [x] Scheduling.js - Start use of Asynchronous programming, use of "setTimeout" and "setInterval";
 - [x] symbol.js - Application of symbol primitive type;
