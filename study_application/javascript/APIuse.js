@@ -1,10 +1,16 @@
-/* GET - search data, send the body
-* POST - create something, send the body
-* PUT - update intern resource
-* PATCH - update a part of the resource
-* DELETE - delete a resource
-* OPTIONS - verification of route
-* HEAD - same as GET, but don't send body
+/* 
+* GET - search data, send query params(URL) - Read
+* POST - create something, send the body - Creation/Action
+* PUT - replace the entire resource - Substitute all
+* PATCH - update a part of the resource - Partial update
+* DELETE - delete a resource - Remove
+* OPTIONS - discover allowed methods - Capabilities
+* HEAD - same as GET, no response body - Metadata
+*/
+
+/*
+*REQ - request - query or JSON which come(to exterior) to use
+*RES - response - value to return to exterior(application to make it)
 */
 
 //create a variable with the imported module, getting a function from express
@@ -17,21 +23,31 @@ const app = express();
 console.log(app.listen(3000));//port - value inside the parenteses
 
 //the port need to be the same as used to test or to work
+//all paths needs to be equals from the work/test
+//functions need to receive request(req) and a response(res) value parameters
+
 
 //GET request
 
 //SYNTAX -- app.get(<path>, <callback/function>)
-//path also need equals from the work/test
-//functions need to receive request(req) and a response(res)  value
 
 const valueNeed = 'STROK';
 
-app.get('/', (req, res) => {
-    const data = Object.values(req.query);//get the value returned
-    for(let value of data) {
-        if (value == valueNeed) res.send('str - true');
-    }
+app.get('/get', (req, res) => {
+    if(Object.values(req.query).find((value) => (value == valueNeed) ? true : false)) res.send('str - true');
+    else res.send('str - false');
 });
 
 //res.send(<value>);
 //return a value, work as a "confirmation" message
+
+//POST request
+
+//SYNTAX -- app.post(<path>, <callback/function>);
+
+app.use(express.json());//allow to use JSON values from requests
+
+app.post('/post', (req, res) => {
+    console.log(req.body);
+    res.send(true);
+});
