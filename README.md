@@ -35,7 +35,6 @@ Files where I try to *apply the things I learn in complete programs*.
 - [x] pomodoro_clock.js - A simple pomodoro clock where the user gives the focus time, rest time, and how many repeats;
 - [x] quiz.js - A simple quiz with predefined values, used to start applying control flow;
 - [x] text_decodifier.js - Gets text from the user and converts it to a Unicode-like format, and also reverses it back;
-- [ ] user_informations.js - *Incomplete* - A project that works like a sign-up application, where the user enters information and the program confirms if everything is correct
 
 ---
 
