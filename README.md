@@ -36,6 +36,11 @@ Files where I try to *apply the things I learn in complete programs*.
 - [x] quiz.js - A simple quiz with predefined values, used to start applying control flow;
 - [x] text_decodifier.js - Gets text from the user and converts it to a Unicode-like format, and also reverses it back;
 
+### *APIs*
+#### programming projects using APIs model
+
+- [ ] notes_API.js - An API to stundets notes, which see informations of a student and set the notes
+
 ---
 
 ## *study_application*
