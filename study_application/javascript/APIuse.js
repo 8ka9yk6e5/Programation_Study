@@ -34,7 +34,10 @@ console.log(app.listen(3000));//port - value inside the parenteses
 const valueNeed = 'STROK';
 
 app.get('/get', (req, res) => {
-    if(Object.values(req.query).find((value) => (value == valueNeed) ? true : false)) res.send('str - true');
+    if(Object.values(req.query).find((value) => (value == valueNeed) ? true : false)) {
+        console.log('work');
+        res.send('str - true');
+    }
     else res.send('str - false');
 });
 
@@ -51,3 +54,34 @@ app.post('/post', (req, res) => {
     console.log(req.body);
     res.send(true);
 });
+
+//PUT request
+
+//SYNTAX -- app.put(<path>, <callback/function>);
+
+
+app.put('/put', (req, res) => {
+    console.log("change call(PUT)");
+    console.log(JSON.stringify(req.body));
+    res.send('working');
+});
+
+//DELETE request
+
+//SYNTAX -- app.delete(<path>, <callback/function>);
+
+app.delete('/delete/:value', (req, res) => {//the colon transfom it in a variable
+    console.log('delete request - to delete : ' + req.params.value);//to access the params inside the url, in case, the value param
+    console.log(req.url);//to access the whole url
+    res.send(`deleted : ${req.params.value}`);
+});
+
+//PATHs
+
+const paths = [
+    '/abc',//hits only the specific path
+    ['/abc', '/def'],//hits all match path inside the array
+    '/abc/:abcvalue',//create a variable with the param(value after colon)
+    '/abc/:abcvalue?',//with a optional second value
+    '/abc/*',//match with any subpath, if the path match
+]
