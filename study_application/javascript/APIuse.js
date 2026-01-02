@@ -4,8 +4,6 @@
 * PUT - replace the entire resource - Substitute all
 * PATCH - update a part of the resource - Partial update
 * DELETE - delete a resource - Remove
-* OPTIONS - discover allowed methods - Capabilities
-* HEAD - same as GET, no response body - Metadata
 */
 
 /*
@@ -66,6 +64,16 @@ app.put('/put', (req, res) => {
     res.send('working');
 });
 
+//PATCH request
+
+//SYNTAX -- app.patch(<path>, <callback/function>);
+
+app.patch('/patch', (req, res) => {
+    console.log(`Change this: ${Object.keys(req.body)}`);
+    console.log(`To this: ${Object.values(req.body)}`);
+    res.send('values changed');
+});
+
 //DELETE request
 
 //SYNTAX -- app.delete(<path>, <callback/function>);
@@ -85,3 +93,60 @@ const paths = [
     '/abc/:abcvalue?',//with a optional second value
     '/abc/*',//match with any subpath, if the path match
 ]
+
+
+
+//REQuest commands
+
+// - req.params;
+//it's the properties defined at the URL
+//functions:
+// -- .name: give the name of the params
+// -- .<name to param add>: used in cases which in url, has an special option to it, saving the value in it name
+//like: "/url/:param", to use .param
+
+// - req.query;
+//an object with each quey string in parameters
+
+// - req.body;
+//to receive json/object requests
+
+app.get('/reqC/:param', (req, res) => {
+    console.log(`param request : ${JSON.stringify(req.params)}`);
+    console.log(`query request : ${JSON.stringify(req.query)}`);
+    console.log(`body request : ${JSON.stringify(req.body)}`);
+    res.end();
+});
+
+//RESponse commands
+
+// - res.send(<body/reponse>);
+//sends a response to user, the body can by any type
+
+// - res.json(<body/json>);
+//sends a JSON response to user
+
+// - res.status(<code>);
+//set the status of the response, can send the code with a message
+//status code:
+// -- add status...
+
+// - res.end();
+//end the process whitout any response
+
+app.get('/resC', (req, res) => {
+    switch(req.query.response){
+        case 'send':
+            res.send("normal response");
+            break;
+        case 'json':
+            res.json({responseReturn : "JSON"});
+            break;
+        case 'status':
+            res.status(400).send('status reponse');
+            break;
+        case 'end':
+            res.end();
+            break;
+    }
+});
