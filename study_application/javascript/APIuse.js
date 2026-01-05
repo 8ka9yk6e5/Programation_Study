@@ -4,6 +4,11 @@
 * PUT - replace the entire resource - Substitute all
 * PATCH - update a part of the resource - Partial update
 * DELETE - delete a resource - Remove
+<<<<<<< HEAD
+=======
+* OPTIONS - discover allowed methods - Capabilities
+* HEAD - same as GET, no response body - Metadata
+>>>>>>> dfcf7ce (initial commit)
 */
 
 /*
@@ -32,10 +37,14 @@ console.log(app.listen(3000));//port - value inside the parenteses
 const valueNeed = 'STROK';
 
 app.get('/get', (req, res) => {
+<<<<<<< HEAD
     if(Object.values(req.query).find((value) => (value == valueNeed) ? true : false)) {
         console.log('work');
         res.send('str - true');
     }
+=======
+    if(Object.values(req.query).find((value) => (value == valueNeed) ? true : false)) res.send('str - true');
+>>>>>>> dfcf7ce (initial commit)
     else res.send('str - false');
 });
 
@@ -51,6 +60,7 @@ app.use(express.json());//allow to use JSON values from requests
 app.post('/post', (req, res) => {
     console.log(req.body);
     res.send(true);
+<<<<<<< HEAD
 });
 
 //PUT request
@@ -149,4 +159,6 @@ app.get('/resC', (req, res) => {
             res.end();
             break;
     }
+=======
+>>>>>>> dfcf7ce (initial commit)
 });
