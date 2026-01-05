@@ -10,7 +10,7 @@ const studentsMap = new Map();
 
 app.use(express.json());
 
-
+//post path
 
 app.post('/createStudent', (req, res) => {
     const response = {};
@@ -19,6 +19,7 @@ app.post('/createStudent', (req, res) => {
 });
 
 const studentCreationService = {
+    //control all part of student creation
     studentCreation(informations){
         informations = studentsCreationValidator.unimportantValueRemover(Object.entries(informations));
 
@@ -55,6 +56,7 @@ const studentCreationService = {
         return (name && grade && absences && notes);
     },
 
+    //save the student in a map
     studentsCreationSaver(informationReq){
         this.studentObjectValues = new objectConstructor(informationReq);
         const {name : studentObjectKey} = informationReq;
@@ -123,11 +125,24 @@ const studentsCreationValidator = {
     }
 };
 
+
+//get path
+
+app.get('/search', (req, res) =>{
+    const result = searchStudent(req.query.name);
+    res.send(result);
+});
+
+function searchStudent(queryName){
+    if (queryName) return studentsMap.keys;//correct this bug
+    else if(studentsMap.has(queryName)) return studentsMap.get(queryName);
+    else return false;//add an error
+}
+
 app.listen(3001);
 
 //when learn about error handling add the errors
 //add a note verification if has medium note, and if doesn't add a form to calculate and add
-//add a search student method
 //add a delete method to remove student
 //add a put to uptade the student
 //add a patch to change little things in students
