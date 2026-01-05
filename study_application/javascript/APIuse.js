@@ -117,7 +117,7 @@ const paths = [
 // - req.body;
 //to receive json/object requests
 
-// - req.headers.<header>;
+// - req.headers;
 //to receive metadades
 
 app.get('/reqC/:param', (req, res) => {
@@ -136,11 +136,6 @@ app.get('/reqC/:param', (req, res) => {
 // - res.json(<body/json>);
 //sends a JSON response to user
 
-// - res.status(<code>);
-//set the status of the response, can send the code with a message
-//status code:
-// -- add status...
-
 // - res.end();
 //end the process whitout any response
 
@@ -152,11 +147,34 @@ app.get('/resC', (req, res) => {
         case 'json':
             res.json({responseReturn : "JSON"});
             break;
-        case 'status':
-            res.status(400).send('status reponse');
-            break;
         case 'end':
             res.end();
             break;
     }
 });
+
+// - express.json(<option>);
+//buid-in middleware function, which convert the json body into an object to use at code
+//options in it:
+// - inflate - block compressed bodys 
+// - limit - control the maximum request size
+// - reviver - function passed with the JSON.parse
+// - strict - allow to pass any value which JSON.parse can use(or block)
+// - type - define which functions the middleware will process, to allow another type of bodys
+// - verify - to add a verificator function to use in raw body
+
+
+// - res.status(<code>);
+//set the status of the response, can send the code with a message
+//status code:
+//-200 - Ok
+//-201 - Created
+//-204 - No Content
+//-400 - Bad Request
+//-401 - Unauthorized
+//-403 - Forbidden
+//-404 - Not Found
+//-405 - Method Not Allowed
+//-409 - Conflict
+//-500 - Internal Server Error
+//-503 - Service Unavailable
