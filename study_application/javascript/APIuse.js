@@ -37,14 +37,11 @@ console.log(app.listen(3000));//port - value inside the parenteses
 const valueNeed = 'STROK';
 
 app.get('/get', (req, res) => {
-<<<<<<< HEAD
     if(Object.values(req.query).find((value) => (value == valueNeed) ? true : false)) {
         console.log('work');
         res.send('str - true');
     }
-=======
     if(Object.values(req.query).find((value) => (value == valueNeed) ? true : false)) res.send('str - true');
->>>>>>> dfcf7ce (initial commit)
     else res.send('str - false');
 });
 
@@ -60,7 +57,6 @@ app.use(express.json());//allow to use JSON values from requests
 app.post('/post', (req, res) => {
     console.log(req.body);
     res.send(true);
-<<<<<<< HEAD
 });
 
 //PUT request
@@ -121,10 +117,14 @@ const paths = [
 // - req.body;
 //to receive json/object requests
 
+// - req.headers.<header>;
+//to receive metadades
+
 app.get('/reqC/:param', (req, res) => {
     console.log(`param request : ${JSON.stringify(req.params)}`);
     console.log(`query request : ${JSON.stringify(req.query)}`);
     console.log(`body request : ${JSON.stringify(req.body)}`);
+    console.log(`header request : ${req.headers['headervalue']}`);
     res.end();
 });
 
@@ -159,6 +159,4 @@ app.get('/resC', (req, res) => {
             res.end();
             break;
     }
-=======
->>>>>>> dfcf7ce (initial commit)
 });
