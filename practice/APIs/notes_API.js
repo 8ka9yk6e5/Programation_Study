@@ -10,7 +10,7 @@ const studentsMap = new Map();
 
 app.use(express.json());
 
-
+//post path
 
 app.post('/createStudent', (req, res) => {
     const response = {};
@@ -19,17 +19,55 @@ app.post('/createStudent', (req, res) => {
 });
 
 const studentCreationService = {
+    //control all part of student creation
     studentCreation(informations){
         informations = studentsCreationValidator.unimportantValueRemover(Object.entries(informations));
 
         if(studentsCreationValidator.studentCreationImportantValueVerificador(Object.keys(informations))){
-            if(studentsCreationValidator.studentCreationValidatorControl(Object.entries(informations))){
+            if(this.studentCreationValidatorControl.call(studentsCreationValidator, Object.entries(informations))){
+                this.studentsCreationSaver(informations);
                 return true;
             }
             else return false;
         }
         else return false;
+    },
+
+    //methods which add a setter inside each value
+    studentCreationValidatorControl(pairs){
+        let name, grade, absences, notes;
+        for(let pair of pairs){
+            switch(pair[0]){
+                case 'name':
+                    name = this.studentCreationNameValidator(pair[1]);
+                    break;
+                case 'grade':
+                    grade = this.studentCreationGradeValidator(pair[1]);
+                    break;
+                case 'absences':
+                    absences = this.studentCreationAbsencesValidator(pair[1]);
+                    break;
+                case 'notes':
+                    notes = this.studentCreationNotesValidator(Object.entries(pair[1]));
+                    break;
+            }
+        }
+
+        return (name && grade && absences && notes);
+    },
+
+    //save the student in a map
+    studentsCreationSaver(informationReq){
+        this.studentObjectValues = new objectConstructor(informationReq);
+        const {name : studentObjectKey} = informationReq;
+        studentsMap.set(studentObjectKey, this.studentObjectValues);
     }
+};
+
+function objectConstructor(originalObj){
+        this.grade = originalObj.grade;
+        this.absences = originalObj.absences;
+        this.notes = originalObj.notes;
 };
 
 const studentsCreationValidator = {
@@ -62,29 +100,6 @@ const studentsCreationValidator = {
         //add an error
     },
 
-    //methods which add a setter inside each value
-    studentCreationValidatorControl(pairs){
-        let name, grade, absences, notes;
-        for(let pair of pairs){
-            switch(pair[0]){
-                case 'name':
-                    name = this.studentCreationNameValidator(pair[1]);
-                    break;
-                case 'grade':
-                    grade = this.studentCreationGradeValidator(pair[1]);
-                    break;
-                case 'absences':
-                    absences = this.studentCreationAbsencesValidator(pair[1]);
-                    break;
-                case 'notes':
-                    notes = this.studentCreationNotesValidator(Object.entries(pair[1]));
-                    break;
-            }
-        }
-
-        return (name && grade && absences && notes);
-    },
-    
     //method to verify if the name is in a correct format
     studentCreationNameValidator(name){
         if(name?.trim().length > 0 ) return true;
@@ -110,12 +125,27 @@ const studentsCreationValidator = {
     }
 };
 
+
+//get path
+
+app.get('/search', (req, res) =>{
+    const result = searchStudent(req.query.name);
+    res.send(result);
+});
+
+function searchStudent(queryName){
+    let value;
+    if (isFinite(queryName)) return Array.from(studentsMap.keys());//correct this bug
+    else if(studentsMap.has(queryName)) return studentsMap.get(queryName);
+    else return false;//add an error
+}
+
+
 app.listen(3001);
 
 //when learn about error handling add the errors
-//add a saver of the student
+//add a form to don't accept values with same name
 //add a note verification if has medium note, and if doesn't add a form to calculate and add
-//add a search student method
 //add a delete method to remove student
 //add a put to uptade the student
 //add a patch to change little things in students
