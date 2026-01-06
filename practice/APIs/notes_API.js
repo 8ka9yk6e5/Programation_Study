@@ -134,14 +134,17 @@ app.get('/search', (req, res) =>{
 });
 
 function searchStudent(queryName){
-    if (queryName) return studentsMap.keys;//correct this bug
+    let value;
+    if (isFinite(queryName)) return Array.from(studentsMap.keys());//correct this bug
     else if(studentsMap.has(queryName)) return studentsMap.get(queryName);
     else return false;//add an error
 }
 
+
 app.listen(3001);
 
 //when learn about error handling add the errors
+//add a form to don't accept values with same name
 //add a note verification if has medium note, and if doesn't add a form to calculate and add
 //add a delete method to remove student
 //add a put to uptade the student
