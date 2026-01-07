@@ -134,8 +134,7 @@ app.get('/search', (req, res) =>{
 });
 
 function searchStudent(queryName){
-    let value;
-    if (isFinite(queryName)) return Array.from(studentsMap.keys());//correct this bug
+    if (isFinite(queryName)) return Array.from(studentsMap.keys());
     else if(studentsMap.has(queryName)) return studentsMap.get(queryName);
     else return false;//add an error
 }
