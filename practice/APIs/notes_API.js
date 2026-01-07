@@ -21,12 +21,15 @@ app.post('/createStudent', (req, res) => {
 const studentCreationService = {
     //control all part of student creation
     studentCreation(informations){
-        informations = studentsCreationValidator.unimportantValueRemover(Object.entries(informations));
+        informations = studentCreationValidator.unimportantValueRemover(Object.entries(informations));
 
-        if(studentsCreationValidator.studentCreationImportantValueVerificador(Object.keys(informations))){
-            if(this.studentCreationValidatorControl.call(studentsCreationValidator, Object.entries(informations))){
-                this.studentsCreationSaver(informations);
-                return true;
+        if(!studentsMap.has(informations.name)){
+            if(studentCreationValidator.studentCreationImportantValueVerificador(Object.keys(informations))){
+                if(this.studentCreationValidatorControl.call(studentCreationValidator, Object.entries(informations))){
+                    this.studentCreationSaver(informations);
+                    return true;
+                }
+                else return false;
             }
             else return false;
         }
@@ -57,7 +60,7 @@ const studentCreationService = {
     },
 
     //save the student in a map
-    studentsCreationSaver(informationReq){
+    studentCreationSaver(informationReq){
         this.studentObjectValues = new objectConstructor(informationReq);
         const {name : studentObjectKey} = informationReq;
         studentsMap.set(studentObjectKey, this.studentObjectValues);
@@ -70,7 +73,7 @@ function objectConstructor(originalObj){
         this.notes = originalObj.notes;
 };
 
-const studentsCreationValidator = {
+const studentCreationValidator = {
     importantValues : ['name', 'grade', 'absences', 'notes'],
 
     unimportantValueRemover(informations){//test this function
@@ -134,7 +137,6 @@ app.get('/search', (req, res) =>{
 });
 
 function searchStudent(queryName){
-    let value;
     if (isFinite(queryName)) return Array.from(studentsMap.keys());//correct this bug
     else if(studentsMap.has(queryName)) return studentsMap.get(queryName);
     else return false;//add an error
@@ -144,7 +146,6 @@ function searchStudent(queryName){
 app.listen(3001);
 
 //when learn about error handling add the errors
-//add a form to don't accept values with same name
 //add a note verification if has medium note, and if doesn't add a form to calculate and add
 //add a delete method to remove student
 //add a put to uptade the student
