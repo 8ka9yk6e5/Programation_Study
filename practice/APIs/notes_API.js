@@ -150,3 +150,4 @@ app.listen(3001);
 //add a delete method to remove student
 //add a put to uptade the student
 //add a patch to change little things in students
+//improve all code
