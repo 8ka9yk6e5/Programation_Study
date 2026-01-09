@@ -178,3 +178,22 @@ app.get('/resC', (req, res) => {
 //-409 - Conflict
 //-500 - Internal Server Error
 //-503 - Service Unavailable
+
+//MIDDLEWARE - the function which values will pass, it's used next as callback to pass to the next middleware
+//middlewares can be more than 2
+
+// - next();
+//3rd function received for an API route, it's the callback to the next middleware, to pass to the other
+
+app.get('/midware', (req, res, next) =>{//middleware one
+    //runs middleware 1
+    res.status(201);
+    next();//pass to middleware 2
+}, (req, res) =>{//middleware two
+    //run middleware 2
+    res.send('test');
+    res.end();//end route
+});
+
+//MIDDLEWARE ROUTE
+
