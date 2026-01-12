@@ -1,35 +1,47 @@
 const itemValidator = {
-    keyValidator(req, res, next){
-        const keys = Object.keys(req.body);
-        if(keys.every(value => value.trim().length > 0)) next();
-        else throw new Error('Invalid Key in request').message;
+    _keyValidator(keys){
+        if(!(keys.every(value => value.trim().length > 0))) throw new Error('Invalid Key in request');
     },
 
-    valueValidator(req, res, next){
-        try{
-            for(let item of Object.entries(req.body)){
-                let itemObject = Object.fromEntries(item[1]);
-                if (itemValidator._codeValidator(itemObject.code)) res.end();
-            }
-        }
-        catch(err){
-            res.status(400).json({work : false, Error : err.message});
+    _importantValueVerifier(){
+
+    },
+
+    _unimportantValuesRemover(){
+
+    },
+
+    _valueValidator(items){
+        for(let item of items){
+            let itemInformations = item[1];
+            itemValidator._codeValidator(itemInformations.code);
+            itemValidator._quantityValidator(itemInformations.quantity);
+            itemValidator._priceValidator(itemInformations.price);
         }
     },
 
     _codeValidator(code){
         const strCode = String(code);
-        if(strCode.length == 6 && !isNaN(code)) return true;
-        else throw new Error('Invalid code value'); 
+        if(!(strCode.length == 6) || isNaN(code)) throw new Error('Invalid item code');
     },
-
     _quantityValidator(quantity){
-
+        if(!(quantity >= 0)) throw new Error('Invalid quantity');
     },
 
     _priceValidator(price){
-
+        if(!(price >= 0) || isNaN(price)) throw new Error('invalid price');
     },
+
+    validatorControler(req, res, next){
+        try{
+            itemValidator._keyValidator(Object.keys(req.body));
+            itemValidator._valueValidator(Object.entries(req.body));
+            next();
+        }
+        catch(err){
+            res.status(400).json({work : false, Error : err.message});
+        }
+    }
 };
 
 module.exports = itemValidator;
