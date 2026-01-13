@@ -53,6 +53,8 @@ Files *applying commands and new features* to learn how each one works and how t
 - [x] Array.js - Application of array methods and features;
 - [x] binding.js - The syntax of binding, the use and application of it;
 - [x] chaining.js - Application of optional chaining, with the "?." symbol;
+- [x] class_basic.js - Study about the basic syntax of class;
+- [ ] custom_errors.js - The use and creations of custom error to use in error handling;
 - [x] Dec_forward.js - Application of decorators and how they work, including call and apply for callbacks;
 - [x] destruction.js - Application of the destruction syntax, from objects and arrays;
 - [x] error_hancling.js - Application of try...catch to support errors;
