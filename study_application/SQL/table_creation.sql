@@ -28,7 +28,6 @@ DROP TABLE users;
 
 ALTER TABLE users
     ADD phone_number VARCHAR(15);
-
 -- ADD : add a new column to the table
 
 SELECT * FROM users;
