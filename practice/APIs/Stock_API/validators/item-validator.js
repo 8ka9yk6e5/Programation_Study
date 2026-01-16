@@ -34,7 +34,7 @@ function _quantityValidator(quantity){
 
 function _priceValidator(price){
     const strPrice = String(price);
-    if(!(price >= 0) || !/^\d+$/.test(strPrice)) throw new Error('invalid price');
+    if(!(price >= 0) || isNaN(strPrice)) throw new Error('invalid price');
 }
 
 const _importantValues = ['code', 'quantity', 'price'];
@@ -42,11 +42,8 @@ const _importantValues = ['code', 'quantity', 'price'];
 function _importantValueVerifier(items){
     for (let item of items){
         let informations = Object.keys(item[1]);
-        if(!(_importantValues.every(valueName => informations.includes(valueName)))) {
-            throw new Error('Important value is missing');
-        }
+        if(!(_importantValues.every(valueName => informations.includes(valueName)))) throw new Error('Important value is missing');
     }
 }
 
 module.exports = validatorMiddleware;
-//correct the response message
