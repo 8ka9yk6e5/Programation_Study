@@ -1,8 +1,8 @@
-function validatorControler(req, res, next){
+function validatorMiddleware(req, res, next){
     try{
         _keyValidator(Object.keys(req.body));
+        _importantValueVerifier(Object.entries(req.body));
         _valueValidator(Object.entries(req.body));
-        _importantValues(Object.entries(req));
         next();
     }
     catch(err){
@@ -25,7 +25,7 @@ function _valueValidator(items){
 
 function _codeValidator(code){
     const strCode = String(code);
-    if(!(strCode.length == 6) || isNaN(code)) throw new Error('Invalid item code');
+    if(!(strCode.length == 6) || isNaN(strCode)) throw new Error('Invalid item code');
 }
 
 function _quantityValidator(quantity){
@@ -33,13 +33,20 @@ function _quantityValidator(quantity){
 }
 
 function _priceValidator(price){
-    if(!(price >= 0) || isNaN(price)) throw new Error('invalid price');
+    const strPrice = String(price);
+    if(!(price >= 0) || !/^\d+$/.test(strPrice)) throw new Error('invalid price');
 }
 
 const _importantValues = ['code', 'quantity', 'price'];
 
-function _importantValueVerifier(item){
-    if(!(_importantValues.every(valueName => valueName == item))) throw new Error('Important value is missing');
+function _importantValueVerifier(items){
+    for (let item of items){
+        let informations = Object.keys(item[1]);
+        if(!(_importantValues.every(valueName => informations.includes(valueName)))) {
+            throw new Error('Important value is missing');
+        }
+    }
 }
 
-module.exports = validatorControler;
+module.exports = validatorMiddleware;
+//correct the response message
