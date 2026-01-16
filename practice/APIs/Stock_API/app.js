@@ -1,10 +1,9 @@
 const express = require('express');
-const {keyValidator} = require('./item_validator');
+const itemRouter = require('./router/items-routes');
 
 const app = express();
-
 app.use(express.json());
 
-app.post('/item/add', keyValidator);
+app.use('/item', itemRouter);
 
 app.listen(3001);
